@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenkins Report Portal</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+
+<div class="header">
+    🚀 Jenkins Consolidated Report Portal
+</div>
+
+<div class="subtitle">
+    Automated QA Test Reporting Dashboard
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <h2>Generate Test Report</h2>
+
+        <p>Enter a branch name or leave blank to use the latest build.</p>
+
+        <input
+            type="text"
+            id="branch"
+            placeholder="e.g. prod-2026-7"
+            autocomplete="off"
+        >
+
+        <br><br>
+        {% if error %}
+            <p class="error-text">🚫 {{ error }}</p>
+        {% endif %}
+        <button onclick="generateView()">
+            ⚡ Generate & View Report
+        </button>
+
+        <br><br>
+
+        <button onclick="generateDownload()">
+            ⬇ Download PDF Report
+        </button>
+
+        <div id="loader" class="loader"></div>
+
+    </div>
+</div>
+{% if report %}
+    <iframe src="{{ report }}" width="100%" height="600px"></iframe>
+{% endif %}
+<div class="footer">
+    Powered by Jenkins • QA Automation Dashboard
+</div>
+
+</body>
+</html>
